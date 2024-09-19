@@ -8,7 +8,9 @@ import (
 )
 
 type Config struct {
-	MongoURI string
+	MongoURI  string
+	Port      string
+	SecretKey string
 }
 
 var AppConfig Config
@@ -20,6 +22,9 @@ func LoadConfig() {
 	}
 
 	AppConfig.MongoURI = getEnv("MONGODB_URI", "")
+	AppConfig.Port = getEnv("PORT", "8080")
+	AppConfig.SecretKey = getEnv("SECRET_KEY", "defaultSecret")
+
 	if AppConfig.MongoURI == "" {
 		log.Fatal("MONGODB_URI environment variable is not set")
 	}

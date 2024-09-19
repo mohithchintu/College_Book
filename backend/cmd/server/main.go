@@ -9,12 +9,15 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/mohithchintu/College_Book/backend/config"
 	"github.com/mohithchintu/College_Book/backend/db"
+	"github.com/mohithchintu/College_Book/backend/routes"
 )
 
 func main() {
 	config.LoadConfig()
 	db.MongoConnect()
 	app := fiber.New()
+	routes.UserRoutes(app)
+
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Hello, MongoDB!")
 	})

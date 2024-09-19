@@ -1,14 +1,24 @@
 root = "."
 tmp_dir = "tmp"
 
+
 [build]
 bin = "tmp/main.exe"
 cmd = "go build -o tmp/main.exe ./cmd/server"
-include = ["**/*.go"]
-exclude = ["tmp/*", "client/*"]
+include = [
+    "cmd/**/*.go",
+    "config/**/*.go",
+    "controllers/**/*.go",
+    "db/**/*.go",
+    "models/**/*.go",
+    "routes/**/*.go",
+]
+exclude = ["tmp/*", "frontend/*"]
 ignore = ["tmp/*"]
+
 
 [deploy]
 cmd = "tmp/main.exe"
-watch_dir = ["."]
+watch_dir = ["cmd", "config", "controllers", "db", "models", "routes"]
 watch_ext = ["go"]
+ignore = ["frontend/*", "node_modules/*", ".git/*", "tmp/*"]
