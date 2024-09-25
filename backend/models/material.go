@@ -6,7 +6,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type Collection struct {
+type Material struct {
 	ID        primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
 	UserID    primitive.ObjectID `bson:"userId" json:"userId"`
 	Tags      []string           `bson:"tags" json:"tags"`

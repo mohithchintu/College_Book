@@ -23,7 +23,7 @@ func LoadConfig() {
 
 	AppConfig.MongoURI = getEnv("MONGODB_URI", "")
 	AppConfig.Port = getEnv("PORT", "8080")
-	AppConfig.SecretKey = getEnv("SECRET_KEY", "defaultSecret")
+	AppConfig.SecretKey = getEnv("SECRET_KEY", "GOAT")
 
 	if AppConfig.MongoURI == "" {
 		log.Fatal("MONGODB_URI environment variable is not set")

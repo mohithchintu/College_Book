@@ -17,6 +17,7 @@ func main() {
 	db.MongoConnect()
 	app := fiber.New()
 	routes.UserRoutes(app)
+	routes.MaterialRoutes(app)
 
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Hello, MongoDB!")
@@ -26,7 +27,7 @@ func main() {
 	signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
 
 	go func() {
-		if err := app.Listen(":5000"); err != nil {
+		if err := app.Listen("0.0.0.0:" + config.AppConfig.Port); err != nil {
 			log.Fatalf("Error starting server: %v", err)
 		}
 	}()
