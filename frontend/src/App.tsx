@@ -4,6 +4,10 @@ import Home from './pages/Home'
 import Profile from './pages/Profile'
 import Layout from './components/Layout'
 import { UserContextProvider } from './context/userContext'
+import Material from './pages/Material'
+import Register from './pages/Register'
+import Login from './pages/Login'
+import Test from './pages/Test'
 
 const App: React.FC = () => {
   return (
@@ -14,6 +18,11 @@ const App: React.FC = () => {
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/profile' element={<Profile />} />
+              <Route path='/material' element={<Material />} />
+              <Route path='/test' element={<Test />} />
+
+              <Route path='/register' element={<Register />} />
+              <Route path='/login' element={<Login />} />
             </Routes>
           </Layout>
         </div>

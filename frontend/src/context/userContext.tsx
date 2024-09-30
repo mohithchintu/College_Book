@@ -1,6 +1,5 @@
 import React, { createContext, ReactNode, useContext, useState, useCallback } from "react";
 
-// Define the context type  
 interface UserContextType {
     isAuthenticated: boolean;
     login: () => void;

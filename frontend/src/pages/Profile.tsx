@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DialogUI from '../components/UI/dialog';
 import settings from '../assets/settings.svg';
 import manage_account from '../assets/manage_account.svg';
 import back from '../assets/back.svg';
-import profile from '../assets/profile.svg';
 import edit from '../assets/edit.svg';
 import block from '../assets/block.svg';
+import { ToolTip } from '../components/UI/tooltip';
+import { userGeneral } from '../utils/userprops';
+import { displaydate } from '../utils/general';
 
 const Profile: React.FC = () => {
-    // const []
+    const [user, setUser] = useState<userGeneral>();
     const navigate = useNavigate();
     const tabs = [
         { label: "General", logo: manage_account },
@@ -17,9 +19,30 @@ const Profile: React.FC = () => {
     ];
     const [activeTab, setActiveTab] = useState<string>(tabs[0].label);
 
+
     const goBack = () => {
         navigate(-1);
     };
+
+    useEffect(() => {
+        setUser({
+            username: "johndoe123",
+            email: "johndoe@example.com",
+            profile: {
+                firstName: "John",
+                lastName: "Doe",
+                profilepicture: "https://static.vecteezy.com/system/resources/previews/004/607/791/non_2x/man-face-emotive-icon-smiling-male-character-in-blue-shirt-flat-illustration-isolated-on-white-happy-human-psychological-portrait-positive-emotions-user-avatar-for-app-web-design-vector.jpg"
+            },
+            dob: new Date("2010-05-05"),
+            mobile: "1234567890",
+            gender: "Male",
+            preferences: {
+                email: true,
+                app: false,
+                theme: true
+            }
+        })
+    }, [])
 
     return (
         <div className='flex'>
@@ -52,13 +75,13 @@ const Profile: React.FC = () => {
                     >
                         <div className='flex flex-col w-full'>
                             <div className='flex justify-center text-5xl font-extralight mt-6 mb-16'>Manage your account</div>
-                            <div className='flex gap-x-10 items-start'>
+                            <div className='flex gap-x-4 items-start'>
 
                                 <div className='w-1/2 flex flex-col rounded-md border p-4 gap-y-4'>
                                     <div className='text-xl'>Basic Information</div>
                                     <div className='font-light mb-2'>Some info may be visible to other people using College Book Community.</div>
                                     <div className='flex flex-col justify-center items-center'>
-                                        <img src={profile} alt='profile' className='w-20 h-20 mb-3' />
+                                        <img src={user?.profile.profilepicture} alt='profile' className='w-20 h-20 mb-3' />
                                         <DialogUI
                                             title="Select image"
                                             inputLabel="Upload"
@@ -71,7 +94,7 @@ const Profile: React.FC = () => {
                                     </div>
                                     <div className='flex border-t justify-between items-center p-1'>
                                         <div className='font-light'>Userame</div>
-                                        <div className='text-md'>Mohith Chintu</div>
+                                        <div className='text-md'>{user?.username}</div>
                                         <DialogUI
                                             title="Change Username"
                                             inputLabel="Username"
@@ -84,7 +107,7 @@ const Profile: React.FC = () => {
                                     </div>
                                     <div className='flex border-t justify-between items-center p-1'>
                                         <div className='font-light'>Birthday</div>
-                                        <div className='text-md'>15 December 2003</div>
+                                        <div className='text-md'>{displaydate(user?.dob)}</div>
                                         <DialogUI
                                             title="Change Birthday"
                                             inputLabel="Birthday"
@@ -97,7 +120,7 @@ const Profile: React.FC = () => {
                                     </div>
                                     <div className='flex border-t justify-between items-center p-1'>
                                         <div className='font-light'>Gender</div>
-                                        <div className='text-md'>Male</div>
+                                        <div className='text-md'>{user?.gender}</div>
                                         <DialogUI
                                             title="Change Gender"
                                             inputLabel="Gender"
@@ -115,12 +138,12 @@ const Profile: React.FC = () => {
                                         <div className='text-xl'>Contact Information</div>
                                         <div className='flex border-t justify-between items-center p-1'>
                                             <div className='font-light'>Email</div>
-                                            <div className='text-md'>konireddy@gmail.com</div>
-                                            <img src={block} alt='edit' className='w-4 h-4' />
+                                            <div className='text-md'>{user?.email}</div>
+                                            <ToolTip message="You can't change your registered email "><img src={block} alt='edit' className='w-4 h-4' /></ToolTip>
                                         </div>
                                         <div className='flex border-t justify-between items-center p-1'>
-                                            <div className='font-light'>Phone Number</div>
-                                            <div className='text-md'>+91 6300202189</div>
+                                            <div className='font-light'>Phone</div>
+                                            <div className='text-md'>+91 {user?.mobile}</div>
                                             <DialogUI
                                                 title="Change Mobile Number"
                                                 inputLabel="Mobile Number"

@@ -11,7 +11,7 @@ const Header: React.FC = () => {
     ]
     const { isAuthenticated } = useUserContext();
     return (
-        <div className='flex justify-between h-16 border-b items-center px-5 shadow-md'>
+        <div className='flex justify-between h-20 border-b items-center px-5 shadow-md'>
             <div className='text-xl'>Logo</div>
             <div className='flex space-x-5 items-center border rounded-lg justify-center px-3 py-1 text-lg shadow-sm'>
                 {navitems.map((item, index) => (
